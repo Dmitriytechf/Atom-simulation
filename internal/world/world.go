@@ -44,19 +44,17 @@ func (w *World) Step(dt float64) {
 	}
 }
 
-// SpawnParticles добавляет в мир Count новых частиц со случайными
-// позициями и скоростями из нормального распределения (Максвелл).
-// Существующие частицы не трогает — можно вызывать многократно.
+// SpawnParticles добавляет в мир кол-во новых частиц со случайными
+// позициями и скоростями из нормального распределения (Максвелл)
+// Существующие частицы не трогает — можно вызывать многократно
 func (w *World) SpawnParticles(opts SpawnOptions) {
-	// Область, в которой разрешено рождаться центрам частиц.
-	// Отступаем MarginPx от стенки и ещё Radius, чтобы круг не вылез.
 	minX := opts.MarginPx + opts.Radius
 	minY := opts.MarginPx + opts.Radius
 	maxX := w.Width - opts.MarginPx - opts.Radius
 	maxY := w.Height - opts.MarginPx - opts.Radius
 
 	if maxX <= minX || maxY <= minY {
-		return // мир слишком маленький — молча ничего не делаем
+		return
 	}
 
 	for i := 0; i < opts.Count; i++ {
